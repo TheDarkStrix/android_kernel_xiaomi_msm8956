@@ -65,6 +65,9 @@ dtb-$(CONFIG_ARCH_MSM8909) += msm8909-sim.dtb \
 	msm8208-1gb-rcm.dtb \
 	msm8208-qhd-cdp.dtb \
 	msm8208-qhd-rcm.dtb
+ifeq ($(CONFIG_MACH_XIAOMI_KENZO),y)
+dtb-$(CONFIG_ARCH_MSM8916) += kenzo-msm8956-mtp.dtb
+else
 dtb-$(CONFIG_ARCH_MSM8916) += msm8916-sim.dtb \
 	msm8916-rumi.dtb \
 	msm8916-cdp.dtb \
