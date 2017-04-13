@@ -25,7 +25,7 @@ MODULE_DIR=$OUT_DIR/modules
 NEW_OUT=$OUT_DIR
 
 # Kernel Version Info
-BASE="Trigon_Kernel-"
+BASE="Trigon™-Kernel-"
 CUR_VER="V1"
 TRIGON_VER="$BASE$CUR_VER"
  
@@ -44,6 +44,7 @@ function make_trigon {
 		echo "                  Compiling $TRIGON_VER	              "
 		echo -e "*****************************************************"
 		echo
+                mkdir Releases 
 		make $DEFCONFIG
 		make -j4
 		rm -rf $NEWOUT/Image

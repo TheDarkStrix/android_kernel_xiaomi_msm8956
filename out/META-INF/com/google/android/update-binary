@@ -38,10 +38,12 @@ bb=/tmp/anykernel/tools/busybox;
 
 ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
 ui_print " ";
-+ui_print "Flashing Trigon Kernel";  
-+ui_print "         By           ";
-+ui_print "     TheDarkStrix     ";
-+ui_print "                               ";
+ui_print " ";
+ui_print "                               ";
+ui_print "Flashing Trigon Kernel";  
+ui_print "         By           ";
+ui_print "     TheDarkStrix     ";
+ui_print "                               ";
 ui_print " ";
 ui_print " ";
 ui_print "AnyKernel2 by osm0sis";
