@@ -16,7 +16,7 @@ KERNEL_DIR=$PWD
 IMAGE=$KERNEL_DIR/arch/arm64/boot/Image
 #IMAGE=$KERNEL_DIR/arch/arm/boot/zImage for 32 bit architecture
 DTBTOOL=$KERNEL_DIR/scripts/dtbToolCM
-TOOLCHAIN=/home/thedarkstrix.1/dnd/prebuilts/gcc/linux-x86/aarch64
+TOOLCHAIN=/home/thedarkstrix.1/dnd/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
 
 #Paths
 OUT_DIR=$KERNEL_DIR/out
@@ -33,8 +33,9 @@ TRIGON_VER="$BASE$CUR_VER"
 
 DEFCONFIG="kenzo_defconfig"
 export LOCALVERSION=~`echo $TRIGON_VER`
-export CROSS_COMPILE=$TOOLCHAIN/aarch64-linux-android-*
+export CROSS_COMPILE=$TOOLCHAIN/aarch64-linux-android-
 export ARCH=arm64
+export SUBARCH=arm64
 export KBUILD_BUILD_USER="TheDarkStrix"
 export KBUILD_BUILD_HOST="Trigon"
 
@@ -55,7 +56,15 @@ function make_trigon {
 		echo "              Compilation Completed!!              "
 		echo -e "*****************************************************$default"
 		}
+
 		
+function make_onlyclean {
+                echo -e "$green***********************************************"
+                echo "          Cleaning up object files and other stuff                      "
+                echo -e "***********************************************$default"
+                make clean
+                make mrproper
+}
 function make_clean {
 		echo -e "$green***********************************************"
 		echo "          Cleaning up object files and other stuff	              "
@@ -103,7 +112,7 @@ function make_zip {
 		echo -e "*****************************************************"
 		cd $OUT_DIR
 		rm -f '*.zip'
-		zip -yr Trigon_Kenzo_`echo $CUR_VER`.zip *
+		zip -r9 Trigon_Kenzo_`echo $CUR_VER`.zip *
 		mv Trigon_Kenzo_`echo $CUR_VER`.zip $OUT_ZIP
 		echo "Find your zip in Release directory"
 		echo -e "$default"
@@ -120,14 +129,14 @@ function housekeeping {
 		
 
 BUILD_START=$(date +"%s")
-while read -p " 'A' to Compile Again , 'D' to Compile Dirty , 'C' to do a clean compilation , 'N' to exit " choice
+while read -p " 'A' to Compile Again , 'D' to Compile Dirty , 'C' to do a clean compilation , 'E' to do clean only , 'N' to exit " choice
 do
 case "$choice" in
 	a|A)
 		make_trigon
 		break
 		;;
-	r|D )
+	d|D )
 		make_recompile
 		break
 		;;
@@ -135,6 +144,10 @@ case "$choice" in
 		make_clean
 		break;
 		;;
+        e|E )
+                make_onlyclean
+                break;
+                ;;
 	n|N )
 		break
 		;;
