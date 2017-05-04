@@ -52,6 +52,7 @@ mount -o ro -t auto /system;
 mount /data;
 test -f /system/system/build.prop && root=/system;
 
+
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
   ui_print "Checking device...";
   for i in 1 2 3 4 5; do
@@ -75,6 +76,11 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
   set_perm_recursive 0 0 0755 0755 $root/system/etc/init.d;
   mount -o ro,remount -t auto /system;
 fi;
+
+ui_print "Doing the netlink stuff ";
+mount -o rw,remount -t auto /system;
+cp /tmp/anykernel/tools/gxfingerprint.default.so /system/lib64/hw/gxfingerprint.default.so;
+mount -o ro,remount -t auto /system;
 
 ui_print "Injection things...";
 for i in $($bb --list); do
