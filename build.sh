@@ -32,7 +32,6 @@ CUR_TIME="$(date "+%y.%m.%d-%H.%M.%S")"
 # Variables
 
 DEFCONFIG="kenzo_defconfig"
-export LOCALVERSION=~`echo $TRIGON_VER`
 export CROSS_COMPILE=$TOOLCHAIN/aarch64-linux-android-
 export ARCH=arm64
 export SUBARCH=arm64
