@@ -37,6 +37,7 @@ dump_boot;
 # begin ramdisk changes
 
 # insert qcom.power.rc
+insert_line init.qcom.rc "import init.qcom.power.rc" before "import init.qcom.usb.rc" "import init.qcom.power.rc";
 # end ramdisk changes
 
 write_boot;

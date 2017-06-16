@@ -81,6 +81,12 @@ mount -o rw,remount -t auto /system;
 cp /tmp/anykernel/tools/gxfingerprint.default.so /system/lib64/hw/gxfingerprint.default.so;
 mount -o ro,remount -t auto /system;
 
+ui_print "Taking care of postboot script";
+mount -o rw,remount -t auto /system;
+chmod 777 /system/etc/init.qcom.post_boot.sh;
+rm -rf /system/etc/init.qcom.post_boot.sh;
+mount -o ro,remount -t auto /system;
+
 ui_print "Installing kernel...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
