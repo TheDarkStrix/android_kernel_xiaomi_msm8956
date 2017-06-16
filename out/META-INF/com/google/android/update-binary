@@ -76,6 +76,11 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
   fi;
 fi;
 
+ui_print "Pushing goodix lib";
+mount -o rw,remount -t auto /system;
+cp /tmp/anykernel/tools/gxfingerprint.default.so /system/lib64/hw/gxfingerprint.default.so;
+mount -o ro,remount -t auto /system;
+
 ui_print "Installing kernel...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
